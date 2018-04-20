@@ -1,0 +1,40 @@
+namespace ca.djema.rami.game.chess.model;
+
+class ChessGame{
+	1 <@>- 1 Board board;
+	1 <@>- 2 Player player;
+}
+class Board{	
+}
+class Square{
+	1 square -- 0..1 Piece piece;
+}
+class Piece{
+}
+class PiecePawn{
+	isA Piece;
+}
+class PieceKnight{
+	isA Piece;
+}
+class PieceBishop{
+	isA Piece;
+}
+class PieceRook{
+	isA Piece;
+}
+class PieceQueen{
+	isA Piece;
+}
+class PieceKing{
+	isA Piece;
+}
+class Player{
+	1 player -- 1..16 Piece pieces;
+}
+class PlayerWhite{
+	isA Player;
+}
+class PlayerBlack{
+	isA Player;
+}
