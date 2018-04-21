@@ -164,42 +164,42 @@ public class ChessGameScreen extends JFrame {
         
         
         //White Pawn on Light Panel
-        Panel p10 = new Panel(1,0,true);
+        Panel p10 = new Panel(1,0,false);
         p10.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("WhitePawnLight.png"))));
         panels.get(1).add(p10);
         currentBoard.add(p10);
         //White Pawn on Dark Panel
-        Panel p11 = new Panel(1,1,false);
+        Panel p11 = new Panel(1,1,true);
         p11.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("WhitePawnDark.png"))));
         panels.get(1).add(p11);
         currentBoard.add(p11);
         //White Pawn on Light Panel
-        Panel p12 = new Panel(1,2,true);
+        Panel p12 = new Panel(1,2,false);
         p12.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("WhitePawnLight.png"))));
         panels.get(1).add(p12);
         currentBoard.add(p12);
         //White Pawn on Dark Panel
-        Panel p13 = new Panel(1,3,false);
+        Panel p13 = new Panel(1,3,true);
         p13.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("WhitePawnDark.png"))));
         panels.get(1).add(p13);
         currentBoard.add(p13);
         //White Pawn on Light Panel
-        Panel p14 = new Panel(1,4,true);
+        Panel p14 = new Panel(1,4,false);
         p14.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("WhitePawnLight.png"))));
         panels.get(1).add(p14);
         currentBoard.add(p14);
         //White Pawn on Dark Panel
-        Panel p15 = new Panel(1,5,false);
+        Panel p15 = new Panel(1,5,true);
         p15.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("WhitePawnDark.png"))));
         panels.get(1).add(p15);
         currentBoard.add(p15);
         //White Pawn on Light Panel
-        Panel p16 = new Panel(1,6,true);
+        Panel p16 = new Panel(1,6,false);
         p16.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("WhitePawnLight.png"))));
         panels.get(1).add(p16);
         currentBoard.add(p16);
         //White Pawn on Dark Panel
-        Panel p17 = new Panel(1,7,false);
+        Panel p17 = new Panel(1,7,true);
         p17.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("WhitePawnDark.png"))));
         panels.get(1).add(p17);
         currentBoard.add(p17);
@@ -247,12 +247,48 @@ public class ChessGameScreen extends JFrame {
         currentBoard.add(p07);
         
         add(currentBoard);
+        
+        
         setVisible(true);
      
     }
+    
+    private void movePawn(int x1, int y1, int x2, int y2, String player) throws IOException {
+        Panel origin = panels.get(x1).get(y1);
+        Panel destination = panels.get(x2).get(y2);
+        
+        if(origin.isDarkPanel()) {
+            panels.get(x1).get(y1).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("DarkPanel.bmp"))));
+        } else {
+            panels.get(x1).get(y1).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("LightPanel.bmp"))));
+        }
+        
+        if(destination.isDarkPanel() && player.equals("white")) {
+            panels.get(y2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("WhitePawnDark.png"))));
+        } else if (destination.isDarkPanel() && !player.equals("white")) {
+            panels.get(x2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("BlackPawnDark.png"))));
+        } else if (!destination.isDarkPanel() && player.equals("white")) {
+            panels.get(x2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("WhitePawnLight.png"))));
+        } else {
+            panels.get(x2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("BlackPawnLight.png"))));
+        }
+        
+        refreshData();
+        
+        
+    }
 
     private void refreshData() {
-               
+        
+        remove(currentBoard);
+        currentBoard = new JPanel();
+        currentBoard.setLayout(new GridLayout(8, 8));
+        for(int i = 0; i < 8; i++) {
+            for(int j = 0; j < 8; j ++) {
+                currentBoard.add(panels.get(i).get(j));
+            }
+        }
+        add(currentBoard);    
     }
     
 }
