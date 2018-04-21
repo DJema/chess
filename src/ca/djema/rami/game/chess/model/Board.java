@@ -13,6 +13,8 @@ public class Board
 
   //Board Associations
   private ChessGame chessGame;
+  
+  private Square[][] squares;
 
   //------------------------
   // CONSTRUCTOR
@@ -50,5 +52,13 @@ public class Board
       existingChessGame.delete();
     }
   }
+
+public Square[][] getSquares() {
+    return squares;
+}
+
+public void setSquares(Square[][] squares) {
+    this.squares = squares;
+}
 
 }
