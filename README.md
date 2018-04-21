@@ -1,3 +1,3 @@
-# Java Chess Game with swing UI
+# Java Chess Game
 
 ![Screenshot](djema-chess-game.png)
