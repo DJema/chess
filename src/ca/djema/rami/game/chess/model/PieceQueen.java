@@ -15,9 +15,9 @@ public class PieceQueen extends Piece
   // CONSTRUCTOR
   //------------------------
 
-  public PieceQueen(Square aSquare, Player aPlayer)
+  public PieceQueen(int aXPosition, int aYPosition, Player aPlayer)
   {
-    super(aSquare, aPlayer);
+    super(aXPosition, aYPosition, aPlayer);
   }
 
   //------------------------

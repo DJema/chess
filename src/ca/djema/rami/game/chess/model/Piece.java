@@ -3,7 +3,7 @@
 
 package ca.djema.rami.game.chess.model;
 
-// line 12 "../../../../../../ChessGame.ump"
+// line 10 "../../../../../../ChessGame.ump"
 public class Piece
 {
 
@@ -11,21 +11,21 @@ public class Piece
   // MEMBER VARIABLES
   //------------------------
 
+  //Piece Attributes
+  private int xPosition;
+  private int yPosition;
+
   //Piece Associations
-  private Square square;
   private Player player;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Piece(Square aSquare, Player aPlayer)
+  public Piece(int aXPosition, int aYPosition, Player aPlayer)
   {
-    boolean didAddSquare = setSquare(aSquare);
-    if (!didAddSquare)
-    {
-      throw new RuntimeException("Unable to create piece due to square");
-    }
+    xPosition = aXPosition;
+    yPosition = aYPosition;
     boolean didAddPlayer = setPlayer(aPlayer);
     if (!didAddPlayer)
     {
@@ -37,42 +37,35 @@ public class Piece
   // INTERFACE
   //------------------------
 
-  public Square getSquare()
+  public boolean setXPosition(int aXPosition)
   {
-    return square;
+    boolean wasSet = false;
+    xPosition = aXPosition;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public boolean setYPosition(int aYPosition)
+  {
+    boolean wasSet = false;
+    yPosition = aYPosition;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public int getXPosition()
+  {
+    return xPosition;
+  }
+
+  public int getYPosition()
+  {
+    return yPosition;
   }
 
   public Player getPlayer()
   {
     return player;
-  }
-
-  public boolean setSquare(Square aNewSquare)
-  {
-    boolean wasSet = false;
-    if (aNewSquare == null)
-    {
-      //Unable to setSquare to null, as piece must always be associated to a square
-      return wasSet;
-    }
-    
-    Piece existingPiece = aNewSquare.getPiece();
-    if (existingPiece != null && !equals(existingPiece))
-    {
-      //Unable to setSquare, the current square already has a piece, which would be orphaned if it were re-assigned
-      return wasSet;
-    }
-    
-    Square anOldSquare = square;
-    square = aNewSquare;
-    square.setPiece(this);
-
-    if (anOldSquare != null)
-    {
-      anOldSquare.setPiece(null);
-    }
-    wasSet = true;
-    return wasSet;
   }
 
   public boolean setPlayer(Player aPlayer)
@@ -108,12 +101,6 @@ public class Piece
 
   public void delete()
   {
-    Square existingSquare = square;
-    square = null;
-    if (existingSquare != null)
-    {
-      existingSquare.setPiece(null);
-    }
     Player placeholderPlayer = player;
     this.player = null;
     if(placeholderPlayer != null)
@@ -122,4 +109,12 @@ public class Piece
     }
   }
 
+
+  public String toString()
+  {
+    return super.toString() + "["+
+            "xPosition" + ":" + getXPosition()+ "," +
+            "yPosition" + ":" + getYPosition()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "player = "+(getPlayer()!=null?Integer.toHexString(System.identityHashCode(getPlayer())):"null");
+  }
 }

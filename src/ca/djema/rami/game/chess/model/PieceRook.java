@@ -15,9 +15,9 @@ public class PieceRook extends Piece
   // CONSTRUCTOR
   //------------------------
 
-  public PieceRook(Square aSquare, Player aPlayer)
+  public PieceRook(int aXPosition, int aYPosition, Player aPlayer)
   {
-    super(aSquare, aPlayer);
+    super(aXPosition, aYPosition, aPlayer);
   }
 
   //------------------------

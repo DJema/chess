@@ -15,9 +15,9 @@ public class PiecePawn extends Piece
   // CONSTRUCTOR
   //------------------------
 
-  public PiecePawn(Square aSquare, Player aPlayer)
+  public PiecePawn(int aXPosition, int aYPosition, Player aPlayer)
   {
-    super(aSquare, aPlayer);
+    super(aXPosition, aYPosition, aPlayer);
   }
 
   //------------------------

@@ -85,7 +85,7 @@ public class Player
     return 16;
   }
 
-  public Piece addPiece(Square aSquare)
+  public Piece addPiece(int aXPosition, int aYPosition)
   {
     if (numberOfPieces() >= maximumNumberOfPieces())
     {
@@ -93,7 +93,7 @@ public class Player
     }
     else
     {
-      return new Piece(aSquare, this);
+      return new Piece(aXPosition, aYPosition, this);
     }
   }
 

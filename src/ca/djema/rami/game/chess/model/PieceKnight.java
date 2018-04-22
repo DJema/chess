@@ -15,9 +15,9 @@ public class PieceKnight extends Piece
   // CONSTRUCTOR
   //------------------------
 
-  public PieceKnight(Square aSquare, Player aPlayer)
+  public PieceKnight(int aXPosition, int aYPosition, Player aPlayer)
   {
-    super(aSquare, aPlayer);
+    super(aXPosition, aYPosition, aPlayer);
   }
 
   //------------------------

@@ -4,12 +4,12 @@ class ChessGame{
 	1 <@>- 1 Board board;
 	1 <@>- 2 Player player;
 }
-class Board{	
-}
-class Square{
-	1 square -- 0..1 Piece piece;
+class Board{
+	// Piece[][] Board not handled by umple
 }
 class Piece{
+	int xPosition;
+	int yPosition;
 }
 class PiecePawn{
 	isA Piece;

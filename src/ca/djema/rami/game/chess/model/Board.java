@@ -13,8 +13,7 @@ public class Board
 
   //Board Associations
   private ChessGame chessGame;
-  
-  private Square[][] squares;
+  private Piece[][] board;
 
   //------------------------
   // CONSTRUCTOR
@@ -53,12 +52,12 @@ public class Board
     }
   }
 
-public Square[][] getSquares() {
-    return squares;
+public Piece[][] getBoard() {
+    return board;
 }
 
-public void setSquares(Square[][] squares) {
-    this.squares = squares;
+public void setBoard(Piece[][] board) {
+    this.board = board;
 }
 
 }

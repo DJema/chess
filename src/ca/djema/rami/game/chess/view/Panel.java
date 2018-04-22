@@ -2,21 +2,15 @@ package ca.djema.rami.game.chess.view;
 
 import javax.swing.JButton;
 
+import ca.djema.rami.game.chess.application.ChessGameApplication;
+import ca.djema.rami.game.chess.controller.PieceController;
+
 public class Panel extends JButton {
 
     private int xCoordinate;
     private int yCoordinate;
     private boolean isDarkPanel;
     
-    public Panel() {
-        this.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                
-                // Add action
-      
-            }
-        });
-    }
     
     public Panel(int xCoordinate, int yCoordinate, Boolean isDarkPanel) {
         
@@ -27,10 +21,16 @@ public class Panel extends JButton {
         this.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 
-                // Add action
+                click();
       
             }
         });
+    }
+    
+    protected void click() {
+        
+        PieceController.click(this.xCoordinate, this.yCoordinate);
+        
     }
 
     public int getxCoordinate() {

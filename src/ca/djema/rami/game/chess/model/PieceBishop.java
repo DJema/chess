@@ -15,9 +15,9 @@ public class PieceBishop extends Piece
   // CONSTRUCTOR
   //------------------------
 
-  public PieceBishop(Square aSquare, Player aPlayer)
+  public PieceBishop(int aXPosition, int aYPosition, Player aPlayer)
   {
-    super(aSquare, aPlayer);
+    super(aXPosition, aYPosition, aPlayer);
   }
 
   //------------------------
