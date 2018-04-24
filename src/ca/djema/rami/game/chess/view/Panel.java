@@ -1,5 +1,7 @@
 package ca.djema.rami.game.chess.view;
 
+import java.io.IOException;
+
 import javax.swing.JButton;
 
 import ca.djema.rami.game.chess.application.ChessGameApplication;
@@ -21,13 +23,17 @@ public class Panel extends JButton {
         this.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 
-                click();
+                try {
+                    click();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
       
             }
         });
     }
     
-    protected void click() {
+    protected void click() throws IOException {
         
         PieceController.click(this.xCoordinate, this.yCoordinate);
         

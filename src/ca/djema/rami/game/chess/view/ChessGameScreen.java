@@ -19,7 +19,7 @@ public class ChessGameScreen extends JFrame {
         initComponents();
         refreshData();
     }
-
+    
     
     /**
      * @throws IOException
@@ -247,16 +247,14 @@ public class ChessGameScreen extends JFrame {
         currentBoard.add(p07);
         
         add(currentBoard);
-        movePawn(1,0,3,0,"white");
-        movePawn(1,1,3,1,"white");
-        movePawn(3,0,4,0,"white");
-
         
         setVisible(true);
      
     }
     
-    private void movePawn(int x1, int y1, int x2, int y2, String player) throws IOException {
+
+    
+    public void movePawn(int x1, int y1, int x2, int y2, String player) throws IOException {
 
         removePieceFromOrigin(x1, y1, panels.get(x1).get(y1));
 

@@ -57,22 +57,22 @@ public class ChessGameController {
         chessGame.getPlayer(0).addPiece(WhitePawn7);
         
         // Initialize Black pieces (row, column, player)
-        Piece BlackRook0 = new PieceRook(6,0,chessGame.getPlayer(1));
-        Piece BlackKnight0 = new PieceKnight(6,1,chessGame.getPlayer(1));
-        Piece BlackBishop0 = new PieceBishop(6,2,chessGame.getPlayer(1));
-        Piece BlackQueen = new PieceQueen(6,3,chessGame.getPlayer(1));
-        Piece BlackKing = new PieceKing(6,4,chessGame.getPlayer(1));
-        Piece BlackBishop1 = new PieceKing(6,5,chessGame.getPlayer(1));
-        Piece BlackKnight1 = new PieceKing(6,6,chessGame.getPlayer(1));
-        Piece BlackRook1 = new PieceKing(6,7,chessGame.getPlayer(1));
-        Piece BlackPawn0 = new PiecePawn(7,0,chessGame.getPlayer(1));
-        Piece BlackPawn1 = new PiecePawn(7,1,chessGame.getPlayer(1));
-        Piece BlackPawn2 = new PiecePawn(7,2,chessGame.getPlayer(1));
-        Piece BlackPawn3 = new PiecePawn(7,3,chessGame.getPlayer(1));
-        Piece BlackPawn4 = new PiecePawn(7,4,chessGame.getPlayer(1));
-        Piece BlackPawn5 = new PiecePawn(7,5,chessGame.getPlayer(1));
-        Piece BlackPawn6 = new PiecePawn(7,6,chessGame.getPlayer(1));
-        Piece BlackPawn7 = new PiecePawn(7,7,chessGame.getPlayer(1));
+        Piece BlackRook0 = new PieceRook(7,0,chessGame.getPlayer(1));
+        Piece BlackKnight0 = new PieceKnight(7,1,chessGame.getPlayer(1));
+        Piece BlackBishop0 = new PieceBishop(7,2,chessGame.getPlayer(1));
+        Piece BlackQueen = new PieceQueen(7,3,chessGame.getPlayer(1));
+        Piece BlackKing = new PieceKing(7,4,chessGame.getPlayer(1));
+        Piece BlackBishop1 = new PieceKing(7,5,chessGame.getPlayer(1));
+        Piece BlackKnight1 = new PieceKing(7,6,chessGame.getPlayer(1));
+        Piece BlackRook1 = new PieceKing(7,7,chessGame.getPlayer(1));
+        Piece BlackPawn0 = new PiecePawn(6,0,chessGame.getPlayer(1));
+        Piece BlackPawn1 = new PiecePawn(6,1,chessGame.getPlayer(1));
+        Piece BlackPawn2 = new PiecePawn(6,2,chessGame.getPlayer(1));
+        Piece BlackPawn3 = new PiecePawn(6,3,chessGame.getPlayer(1));
+        Piece BlackPawn4 = new PiecePawn(6,4,chessGame.getPlayer(1));
+        Piece BlackPawn5 = new PiecePawn(6,5,chessGame.getPlayer(1));
+        Piece BlackPawn6 = new PiecePawn(6,6,chessGame.getPlayer(1));
+        Piece BlackPawn7 = new PiecePawn(6,7,chessGame.getPlayer(1));
         
         chessGame.getPlayer(1).addPiece(BlackRook0);
         chessGame.getPlayer(1).addPiece(BlackKnight0);
@@ -103,7 +103,8 @@ public class ChessGameController {
             board[xPosition][yPosition] = chessGame.getPlayer(1).getPiece(i); 
         }
         ChessGameApplication.setMovingPlayer(chessGame.getPlayer(0));
-        chessGame.getBoard().setBoard(board);         
+        chessGame.getBoard().setBoard(board);
+        
     }
     
 }

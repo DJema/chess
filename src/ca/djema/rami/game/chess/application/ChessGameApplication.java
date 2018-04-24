@@ -10,9 +10,11 @@ import ca.djema.rami.game.chess.view.ChessGameScreen;
 public class ChessGameApplication {
     
     private static ChessGame chessGame;
-    private static int selectedXPosition;
-    private static int selectedYPosition;
+    private static int selectedXPosition = -1;
+    private static int selectedYPosition = -1;
     private static Player movingPlayer;
+    private static ChessGameScreen ChessGameScreen;
+    
     
     private static boolean isPieceSelected = false;
 
@@ -20,12 +22,11 @@ public class ChessGameApplication {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ChessGameScreen cgs;
                 chessGame = new ChessGame();
                 ChessGameController.initializeGame();
                 try {
-                    cgs = new ChessGameScreen();
-                    cgs.setVisible(true);
+                    ChessGameScreen = new ChessGameScreen();
+                    ChessGameScreen.setVisible(true);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -68,6 +69,14 @@ public class ChessGameApplication {
 
     public static void setMovingPlayer(Player movingPlayer) {
         ChessGameApplication.movingPlayer = movingPlayer;
+    }
+
+    public static ChessGameScreen getChessGameScreen() {
+        return ChessGameScreen;
+    }
+
+    public static void setChessGameScreen(ChessGameScreen chessGameScreen) {
+        ChessGameScreen = chessGameScreen;
     }
     
 }
