@@ -150,16 +150,16 @@ public class PieceController {
                 moves.getListOfValidMovesX().add(currentX - 1);
                 moves.getListOfValidMovesY().add(currentY);
             }
-//            if(currentX + 1 < 8 && currentY + 1 < 8  &&
-//                    board[currentX + 1][currentY + 1] != null && board[currentX + 1][currentY + 1].getPlayer() instanceof PlayerWhite) {
-//                moves.getListOfValidMovesX().add(currentX + 1);
-//                moves.getListOfValidMovesY().add(currentY + 1);
-//            }
-//            if(currentX + 1 < 8 && currentY - 1 < 8 && currentY - 1 >= 0 &&
-//                    board[currentX + 1][currentY - 1] != null && board[currentX + 1][currentY - 1].getPlayer() instanceof PlayerWhite) {
-//                moves.getListOfValidMovesX().add(currentX + 1);
-//                moves.getListOfValidMovesY().add(currentY - 1);
-//            }
+            if(currentX - 1 > -1 && currentY + 1 < 8  &&
+                    board[currentX - 1][currentY + 1] != null && board[currentX - 1][currentY + 1].getPlayer() instanceof PlayerWhite) {
+                moves.getListOfValidMovesX().add(currentX - 1);
+                moves.getListOfValidMovesY().add(currentY + 1);
+            }
+            if(currentX - 1 > -1 && currentY - 1 > -1 && currentY - 1 >= 0 &&
+                    board[currentX - 1][currentY - 1] != null && board[currentX - 1][currentY - 1].getPlayer() instanceof PlayerWhite) {
+                moves.getListOfValidMovesX().add(currentX - 1);
+                moves.getListOfValidMovesY().add(currentY - 1);
+            }
             return moves; 
         }
         
