@@ -306,6 +306,10 @@ public class PieceController {
 				moves.getListOfValidMovesX().add(currentX + 1);
 				moves.getListOfValidMovesY().add(currentY - 1);
 			}
+			if(currentX == 1 && board[currentX + 2][currentY] == null){
+				moves.getListOfValidMovesX().add(currentX + 2);
+				moves.getListOfValidMovesY().add(currentY);
+			}
 			return moves;
 		}
 
@@ -328,6 +332,10 @@ public class PieceController {
 					&& board[currentX - 1][currentY - 1].getPlayer() instanceof PlayerWhite) {
 				moves.getListOfValidMovesX().add(currentX - 1);
 				moves.getListOfValidMovesY().add(currentY - 1);
+			}
+			if(currentX == 6 && board[currentX - 2][currentY] == null){
+				moves.getListOfValidMovesX().add(currentX - 2);
+				moves.getListOfValidMovesY().add(currentY);
 			}
 			return moves;
 
