@@ -292,6 +292,44 @@ public class ChessGameScreen extends JFrame {
        
     }
     
+    public void moveBishop(int x1, int y1, int x2, int y2, String player) throws IOException {
+
+        removePieceFromOrigin(x1, y1, panels.get(x1).get(y1));
+
+        Panel destination = panels.get(x2).get(y2);
+        if(destination.isDarkPanel() && player.equals("white")) {
+            panels.get(x2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/WhiteBishopDark.png"))));
+        } else if (destination.isDarkPanel() && !player.equals("white")) {
+            panels.get(x2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/BlackBishopDark.png"))));
+        } else if (!destination.isDarkPanel() && player.equals("white")) {
+            panels.get(x2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/WhiteBishopLight.png"))));
+        } else {
+            panels.get(x2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/BlackBishopLight.png"))));
+        }
+        
+        refreshData(); 
+       
+    }
+    
+    public void moveKnight(int x1, int y1, int x2, int y2, String player) throws IOException {
+
+        removePieceFromOrigin(x1, y1, panels.get(x1).get(y1));
+
+        Panel destination = panels.get(x2).get(y2);
+        if(destination.isDarkPanel() && player.equals("white")) {
+            panels.get(x2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/WhiteKnightDark.png"))));
+        } else if (destination.isDarkPanel() && !player.equals("white")) {
+            panels.get(x2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/BlackKnightDark.png"))));
+        } else if (!destination.isDarkPanel() && player.equals("white")) {
+            panels.get(x2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/WhiteKnightLight.png"))));
+        } else {
+            panels.get(x2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/BlackKnightLight.png"))));
+        }
+        
+        refreshData(); 
+       
+    }
+    
     private void removePieceFromOrigin(int x1, int y1, Panel origin) throws IOException {
         if(origin.isDarkPanel()) {
             panels.get(x1).get(y1).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/DarkPanel.bmp"))));
