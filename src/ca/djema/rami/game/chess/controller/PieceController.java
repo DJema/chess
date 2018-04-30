@@ -7,6 +7,7 @@ import ca.djema.rami.game.chess.application.ChessGameApplication;
 import ca.djema.rami.game.chess.model.ChessGame;
 import ca.djema.rami.game.chess.model.Piece;
 import ca.djema.rami.game.chess.model.PiecePawn;
+import ca.djema.rami.game.chess.model.PieceRook;
 import ca.djema.rami.game.chess.model.Player;
 import ca.djema.rami.game.chess.model.PlayerBlack;
 import ca.djema.rami.game.chess.model.PlayerWhite;
@@ -50,15 +51,15 @@ public class PieceController {
         ChessGame chessGame = ChessGameApplication.getChessGame();
         Piece movingPiece = chessGame.getBoard().getBoard()[ChessGameApplication.getSelectedXPosition()][ChessGameApplication.getSelectedYPosition()];
         Player movingPlayer = chessGame.getBoard().getBoard()[ChessGameApplication.getSelectedXPosition()][ChessGameApplication.getSelectedYPosition()].getPlayer();
-
-        System.out.println(movingPiece);
-        System.out.println(movingPlayer);
         
         if(movingPiece instanceof PiecePawn && movingPlayer instanceof PlayerWhite) {
             moveWhitePawn(x,y);
         }
         if(movingPiece instanceof PiecePawn && movingPlayer instanceof PlayerBlack) {
             moveBlackPawn(x,y);
+        }
+        if(movingPiece instanceof PieceRook) {
+            moveRook(x,y);
         }
               
     }
@@ -118,6 +119,40 @@ public class PieceController {
         } 
     }
     
+    // Logic for moving a Rook
+    private static void moveRook(int destinationX, int destinationY) throws IOException {
+        
+        ChessGame chessGame = ChessGameApplication.getChessGame();
+        Piece[][] board = chessGame.getBoard().getBoard();
+        int currentX = ChessGameApplication.getSelectedXPosition();
+        int currentY = ChessGameApplication.getSelectedYPosition();
+        Player player = board[currentX][currentY].getPlayer();
+        
+        Moves validMoves = getValidMoves(board[currentX][currentY], board[currentX][currentY].getPlayer());
+      
+        for(int i = 0; i < validMoves.getListOfValidMovesX().size(); i++) {
+            
+            if( validMoves.getListOfValidMovesX().get(i) == destinationX && validMoves.getListOfValidMovesY().get(i) == destinationY) {
+                
+                board[destinationX][destinationY] = board[currentX][currentY];
+                board[currentX][currentY] = null;
+                
+                if(player instanceof PlayerWhite){
+                    ChessGameApplication.getChessGameScreen().moveRook(currentX, currentY, destinationX, destinationY, "white");
+                    ChessGameApplication.setMovingPlayer(chessGame.getPlayer(1));
+                } else {
+                    ChessGameApplication.getChessGameScreen().moveRook(currentX, currentY, destinationX, destinationY, "black");
+                    ChessGameApplication.setMovingPlayer(chessGame.getPlayer(0));
+                }
+
+                ChessGameApplication.setPieceSelected(false);
+                ChessGameApplication.setSelectedXPosition(-1);
+                ChessGameApplication.setSelectedYPosition(-1);
+                    
+                break;
+            }
+        } 
+    }
     
     private static Moves getValidMoves(Piece piece, Player player) {
         Moves moves = new Moves();
@@ -145,7 +180,6 @@ public class PieceController {
         }
         
         if(piece instanceof PiecePawn && player instanceof PlayerBlack) {
-            System.out.println("test");
             if(currentX - 1 > -1 && board[currentX - 1][currentY] == null) {
                 moves.getListOfValidMovesX().add(currentX - 1);
                 moves.getListOfValidMovesY().add(currentY);
@@ -161,6 +195,64 @@ public class PieceController {
                 moves.getListOfValidMovesY().add(currentY - 1);
             }
             return moves; 
+            
+        }
+        
+        if(piece instanceof PieceRook) {
+        	
+        	for(int i = currentX + 1; i < 8; i++){
+        		if(board[i][currentY] == null){
+                    moves.getListOfValidMovesX().add(i);
+                    moves.getListOfValidMovesY().add(currentY);
+        		} else if(board[i][currentY] != null && board[i][currentY].getPlayer() != player){
+                    moves.getListOfValidMovesX().add(i);
+                    moves.getListOfValidMovesY().add(currentY);
+                    break;
+        		} else {
+        			break;
+        		}
+        	}
+        	
+        	for(int i = currentX - 1; i >= 0; i--){
+        		if(board[i][currentY] == null){
+                    moves.getListOfValidMovesX().add(i);
+                    moves.getListOfValidMovesY().add(currentY);
+        		} else if(board[i][currentY] != null && board[i][currentY].getPlayer() != player){
+                    moves.getListOfValidMovesX().add(i);
+                    moves.getListOfValidMovesY().add(currentY);
+                    break;
+        		} else {
+        			break;
+        		}
+        	}
+        	
+        	for(int i = currentY + 1; i <8; i++){
+        		if(board[currentX][i] == null){
+                    moves.getListOfValidMovesX().add(currentX);
+                    moves.getListOfValidMovesY().add(i);
+        		} else if(board[currentX][i] != null && board[currentX][i].getPlayer() != player){
+                    moves.getListOfValidMovesX().add(currentX);
+                    moves.getListOfValidMovesY().add(i);
+                    break;
+        		} else {
+        			break;
+        		}
+        	}
+        	
+        	for(int i = currentY - 1; i >= 0; i--){
+        		if(board[currentX][i] == null){
+                    moves.getListOfValidMovesX().add(currentX);
+                    moves.getListOfValidMovesY().add(i);
+        		} else if(board[currentX][i] != null && board[currentX][i].getPlayer() != player){
+                    moves.getListOfValidMovesX().add(currentX);
+                    moves.getListOfValidMovesY().add(i);
+                    break;
+        		} else {
+        			break;
+        		}
+        	}
+        	
+        	return moves;
         }
         
         return null;

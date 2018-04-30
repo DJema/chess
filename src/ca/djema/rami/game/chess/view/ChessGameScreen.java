@@ -206,42 +206,42 @@ public class ChessGameScreen extends JFrame {
         
         
         //White Rook on Dark Panel
-        Panel p00 = new Panel(0,0,false);
+        Panel p00 = new Panel(0,0,true);
         p00.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/WhiteRookDark.png"))));
         panels.get(0).add(p00);
         currentBoard.add(p00);
         //White Knight on Light Panel
-        Panel p01 = new Panel(0,1,true);
+        Panel p01 = new Panel(0,1,false);
         p01.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/WhiteKnightLight.png"))));
         panels.get(0).add(p01);
         currentBoard.add(p01);
         //White Bishop on Dark Panel
-        Panel p02 = new Panel(0,2,false);
+        Panel p02 = new Panel(0,2,true);
         p02.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/WhiteBishopDark.png"))));
         panels.get(0).add(p02);
         currentBoard.add(p02);
         //White Queen on Light Panel
-        Panel p03 = new Panel(0,3,true);
+        Panel p03 = new Panel(0,3,false);
         p03.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/WhiteQueenLight.png"))));
         panels.get(0).add(p03);
         currentBoard.add(p03);
         //White King on Dark Panel
-        Panel p04 = new Panel(0,4,false);
+        Panel p04 = new Panel(0,4,true);
         p04.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/WhiteKingDark.png"))));
         panels.get(0).add(p04);
         currentBoard.add(p04);
         //White Bishop on Light Panel
-        Panel p05 = new Panel(0,5,true);
+        Panel p05 = new Panel(0,5,false);
         p05.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/WhiteBishopLight.png"))));
         panels.get(0).add(p05);
         currentBoard.add(p05);
         //White Knight on Dark Panel
-        Panel p06 = new Panel(0,6,false);
+        Panel p06 = new Panel(0,6,true);
         p06.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/WhiteKnightDark.png"))));
         panels.get(0).add(p06);
         currentBoard.add(p06);
         //White Rook on Light Panel
-        Panel p07 = new Panel(0,7,true);
+        Panel p07 = new Panel(0,7,false);
         p07.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/WhiteRookLight.png"))));
         panels.get(0).add(p07);
         currentBoard.add(p07);
@@ -269,9 +269,27 @@ public class ChessGameScreen extends JFrame {
             panels.get(x2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/BlackPawnLight.png"))));
         }
         
-        refreshData();
+        refreshData(); 
+       
+    }
+    
+    public void moveRook(int x1, int y1, int x2, int y2, String player) throws IOException {
+
+        removePieceFromOrigin(x1, y1, panels.get(x1).get(y1));
+
+        Panel destination = panels.get(x2).get(y2);
+        if(destination.isDarkPanel() && player.equals("white")) {
+            panels.get(x2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/WhiteRookDark.png"))));
+        } else if (destination.isDarkPanel() && !player.equals("white")) {
+            panels.get(x2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/BlackRookDark.png"))));
+        } else if (!destination.isDarkPanel() && player.equals("white")) {
+            panels.get(x2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/WhiteRookLight.png"))));
+        } else {
+            panels.get(x2).get(y2).setIcon(new ImageIcon(ImageIO.read(getClass().getResource("icons/BlackRookLight.png"))));
+        }
         
-        
+        refreshData(); 
+       
     }
     
     private void removePieceFromOrigin(int x1, int y1, Panel origin) throws IOException {
