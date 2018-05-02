@@ -13,8 +13,7 @@ public class ChessGameApplication {
     private static int selectedXPosition = -1;
     private static int selectedYPosition = -1;
     private static Player movingPlayer;
-    private static ChessGameScreen ChessGameScreen;
-    
+    private static ChessGameScreen ChessGameScreen;   
     
     private static boolean isPieceSelected = false;
 

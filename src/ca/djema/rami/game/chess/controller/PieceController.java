@@ -57,81 +57,151 @@ public class PieceController {
         Player movingPlayer = board[currentX][currentY].getPlayer();
         Piece movingPiece = board[currentX][currentY];
 
-        Moves validMoves = getValidMoves(movingPiece, movingPlayer);
+        Moves validMoves = getValidMoves(movingPiece, movingPlayer, ChessGameApplication.getSelectedXPosition(), ChessGameApplication.getSelectedYPosition(), chessGame.getBoard().getBoard());
 
         for (int i = 0; i < validMoves.getListOfValidMovesX().size(); i++) {
 
             if (validMoves.getListOfValidMovesX().get(i) == destinationX
                     && validMoves.getListOfValidMovesY().get(i) == destinationY) {
 
-                board[destinationX][destinationY] = board[currentX][currentY];
-                board[currentX][currentY] = null;
+                if (!isInCheckAfterMove(destinationX, destinationY, movingPlayer)) {
+                    
+                    board[destinationX][destinationY] = board[currentX][currentY];
+                    board[currentX][currentY] = null;
 
-                if (movingPlayer instanceof PlayerWhite) {
+                    if (movingPlayer instanceof PlayerWhite) {
 
-                    if (movingPiece instanceof PiecePawn) {
-                        ChessGameApplication.getChessGameScreen().movePawn(currentX, currentY, destinationX,
-                                destinationY, "white");
-                    } else if (movingPiece instanceof PieceRook) {
-                        ChessGameApplication.getChessGameScreen().moveRook(currentX, currentY, destinationX,
-                                destinationY, "white");
-                    } else if (movingPiece instanceof PieceKnight) {
-                        ChessGameApplication.getChessGameScreen().moveKnight(currentX, currentY, destinationX,
-                                destinationY, "white");
-                    } else if (movingPiece instanceof PieceBishop) {
-                        ChessGameApplication.getChessGameScreen().moveBishop(currentX, currentY, destinationX,
-                                destinationY, "white");
-                    } else if (movingPiece instanceof PieceQueen) {
-                        ChessGameApplication.getChessGameScreen().moveQueen(currentX, currentY, destinationX,
-                                destinationY, "white");
-                    } else if (movingPiece instanceof PieceKing) {
-                        ChessGameApplication.getChessGameScreen().moveKing(currentX, currentY, destinationX,
-                                destinationY, "white");
+                        if (movingPiece instanceof PiecePawn) {
+                            ChessGameApplication.getChessGameScreen().movePawn(currentX, currentY, destinationX,
+                                    destinationY, "white");
+                        } else if (movingPiece instanceof PieceRook) {
+                            ChessGameApplication.getChessGameScreen().moveRook(currentX, currentY, destinationX,
+                                    destinationY, "white");
+                        } else if (movingPiece instanceof PieceKnight) {
+                            ChessGameApplication.getChessGameScreen().moveKnight(currentX, currentY, destinationX,
+                                    destinationY, "white");
+                        } else if (movingPiece instanceof PieceBishop) {
+                            ChessGameApplication.getChessGameScreen().moveBishop(currentX, currentY, destinationX,
+                                    destinationY, "white");
+                        } else if (movingPiece instanceof PieceQueen) {
+                            ChessGameApplication.getChessGameScreen().moveQueen(currentX, currentY, destinationX,
+                                    destinationY, "white");
+                        } else if (movingPiece instanceof PieceKing) {
+                            ChessGameApplication.getChessGameScreen().moveKing(currentX, currentY, destinationX,
+                                    destinationY, "white");
+                        }
+
+                        ChessGameApplication.setMovingPlayer(chessGame.getPlayer(1));
+
+                    } else {
+
+                        if (movingPiece instanceof PiecePawn) {
+                            ChessGameApplication.getChessGameScreen().movePawn(currentX, currentY, destinationX,
+                                    destinationY, "black");
+                        } else if (movingPiece instanceof PieceRook) {
+                            ChessGameApplication.getChessGameScreen().moveRook(currentX, currentY, destinationX,
+                                    destinationY, "black");
+                        } else if (movingPiece instanceof PieceKnight) {
+                            ChessGameApplication.getChessGameScreen().moveKnight(currentX, currentY, destinationX,
+                                    destinationY, "black");
+                        } else if (movingPiece instanceof PieceBishop) {
+                            ChessGameApplication.getChessGameScreen().moveBishop(currentX, currentY, destinationX,
+                                    destinationY, "black");
+                        } else if (movingPiece instanceof PieceQueen) {
+                            ChessGameApplication.getChessGameScreen().moveQueen(currentX, currentY, destinationX,
+                                    destinationY, "black");
+                        } else if (movingPiece instanceof PieceKing) {
+                            ChessGameApplication.getChessGameScreen().moveKing(currentX, currentY, destinationX,
+                                    destinationY, "black");
+                        }
+
+                        ChessGameApplication.setMovingPlayer(chessGame.getPlayer(0));
                     }
 
-                    ChessGameApplication.setMovingPlayer(chessGame.getPlayer(1));
+                    ChessGameApplication.setPieceSelected(false);
+                    ChessGameApplication.setSelectedXPosition(-1);
+                    ChessGameApplication.setSelectedYPosition(-1);
 
-                } else {
-
-                    if (movingPiece instanceof PiecePawn) {
-                        ChessGameApplication.getChessGameScreen().movePawn(currentX, currentY, destinationX,
-                                destinationY, "black");
-                    } else if (movingPiece instanceof PieceRook) {
-                        ChessGameApplication.getChessGameScreen().moveRook(currentX, currentY, destinationX,
-                                destinationY, "black");
-                    } else if (movingPiece instanceof PieceKnight) {
-                        ChessGameApplication.getChessGameScreen().moveKnight(currentX, currentY, destinationX,
-                                destinationY, "black");
-                    } else if (movingPiece instanceof PieceBishop) {
-                        ChessGameApplication.getChessGameScreen().moveBishop(currentX, currentY, destinationX,
-                                destinationY, "black");
-                    } else if (movingPiece instanceof PieceQueen) {
-                        ChessGameApplication.getChessGameScreen().moveQueen(currentX, currentY, destinationX,
-                                destinationY, "black");
-                    } else if (movingPiece instanceof PieceKing) {
-                        ChessGameApplication.getChessGameScreen().moveKing(currentX, currentY, destinationX,
-                                destinationY, "black");
-                    }
-
-                    ChessGameApplication.setMovingPlayer(chessGame.getPlayer(0));
+                    break;
                 }
-
-                ChessGameApplication.setPieceSelected(false);
-                ChessGameApplication.setSelectedXPosition(-1);
-                ChessGameApplication.setSelectedYPosition(-1);
-
-                break;
             }
         }
 
     }
 
-    private static Moves getValidMoves(Piece piece, Player player) {
-        Moves moves = new Moves();
+    private static boolean isInCheckAfterMove(int destinationX, int destinationY, Player movingPlayer) {
+
         ChessGame chessGame = ChessGameApplication.getChessGame();
         Piece[][] board = chessGame.getBoard().getBoard();
         int currentX = ChessGameApplication.getSelectedXPosition();
         int currentY = ChessGameApplication.getSelectedYPosition();
+        Piece[][] boardCopy = new Piece[8][8];
+        
+        for(int i = 0; i < 8; i++) {
+            for(int j = 0; j < 8; j++) {
+                boardCopy[i][j] = board[i][j];
+            }
+        }
+
+        boardCopy[destinationX][destinationY] = boardCopy[currentX][currentY];
+        boardCopy[currentX][currentY] = null;
+
+        return isInCheck(boardCopy, movingPlayer);
+
+    }
+
+    private static boolean isInCheck(Piece[][] boardCopy, Player movingPlayer) {
+        
+        ChessGame chessGame = ChessGameApplication.getChessGame();
+        int kingXPosition = -1;
+        int kingYPosition = -1;
+
+        Player nonMovingPlayer;
+        if (movingPlayer instanceof PlayerBlack) {
+            nonMovingPlayer = chessGame.getPlayer(0);
+        } else {
+            nonMovingPlayer = chessGame.getPlayer(1);
+        }
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (boardCopy[i][j] != null && boardCopy[i][j].getPlayer().equals(movingPlayer)
+                        && boardCopy[i][j] instanceof PieceKing) {
+                    kingXPosition = i;
+                    kingYPosition = j;
+                }
+            }
+        }
+        
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+
+                if (boardCopy[i][j] != null && !boardCopy[i][j].getPlayer().equals(movingPlayer)) {
+                    Moves moves = getValidMoves(boardCopy[i][j], nonMovingPlayer,i,j, boardCopy);
+                    for (int k = 0; k < moves.getListOfValidMovesX().size(); k++) {
+                        if (moves.getListOfValidMovesX().get(k) == kingXPosition
+                                && moves.getListOfValidMovesY().get(k) == kingYPosition) {
+                            
+                            System.out.println(i);
+                            System.out.println(j);
+                            
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
+
+    }
+
+    private static Moves getValidMoves(Piece piece, Player player, int currentX, int currentY, Piece[][] board) {
+        Moves moves = new Moves();
+        ChessGame chessGame = ChessGameApplication.getChessGame();
+
+
 
         if (piece instanceof PiecePawn && player instanceof PlayerWhite) {
             if (currentX + 1 < 8 && board[currentX + 1][currentY] == null) {
@@ -356,14 +426,14 @@ public class PieceController {
             // Add a combination of the moves a bishop and rook have using a dummy rook and
             // bishop by recursively building it with the validMoves function.
             moves.getListOfValidMovesX().addAll(
-                    getValidMoves(new PieceRook(-1, -1, new Player(new ChessGame())), player).getListOfValidMovesX());
+                    getValidMoves(new PieceRook(-1, -1, new Player(new ChessGame())), player, currentX, currentY, board).getListOfValidMovesX());
             moves.getListOfValidMovesY().addAll(
-                    getValidMoves(new PieceRook(-1, -1, new Player(new ChessGame())), player).getListOfValidMovesY());
+                    getValidMoves(new PieceRook(-1, -1, new Player(new ChessGame())), player, currentX, currentY, board).getListOfValidMovesY());
 
             moves.getListOfValidMovesX().addAll(
-                    getValidMoves(new PieceBishop(-1, -1, new Player(new ChessGame())), player).getListOfValidMovesX());
+                    getValidMoves(new PieceBishop(-1, -1, new Player(new ChessGame())), player, currentX, currentY, board).getListOfValidMovesX());
             moves.getListOfValidMovesY().addAll(
-                    getValidMoves(new PieceBishop(-1, -1, new Player(new ChessGame())), player).getListOfValidMovesY());
+                    getValidMoves(new PieceBishop(-1, -1, new Player(new ChessGame())), player, currentX, currentY, board).getListOfValidMovesY());
 
         }
 
