@@ -11,6 +11,8 @@ public class PieceRook extends Piece
   // MEMBER VARIABLES
   //------------------------
 
+    private boolean hasMoved = false;
+    
   //------------------------
   // CONSTRUCTOR
   //------------------------
@@ -28,5 +30,13 @@ public class PieceRook extends Piece
   {
     super.delete();
   }
+
+public boolean isHasMoved() {
+    return hasMoved;
+}
+
+public void setHasMoved(boolean hasMoved) {
+    this.hasMoved = hasMoved;
+}
 
 }
